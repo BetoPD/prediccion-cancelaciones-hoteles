@@ -37,7 +37,7 @@ mcp = FastMCP(
 
 
 class Reserva(BaseModel):
-    """Datos conocidos al momento de hacer la reserva (sin variables que revelan el desenlace)."""
+    """Datos conocidos el día anterior a la llegada (sin variables que revelan el desenlace)."""
 
     hotel: Literal["City Hotel", "Resort Hotel"] = Field(
         description="City Hotel = hotel urbano (Lisboa); Resort Hotel = resort (Algarve)")

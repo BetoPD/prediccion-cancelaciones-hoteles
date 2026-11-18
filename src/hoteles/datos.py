@@ -29,6 +29,8 @@ NUM_BASE = ["lead_time", "arrival_date_week_number", "arrival_date_day_of_month"
 NUM_NUEVAS = ["noches", "huespedes", "estancia_cero", "proporcion_fin_semana", "tiene_ninos",
               "mes_sin", "mes_cos", "llegada_fin_semana", "tiene_agente", "tiene_empresa",
               "historial_reservas", "tasa_cancelacion_previa", "adr_por_persona"]
+# Se calculan dentro del Pipeline porque aprenden de los datos de entrenamiento.
+NUM_APRENDIDAS = ["frecuencia_agente"]
 CAT = ["hotel", "meal", "market_segment", "distribution_channel", "reserved_room_type",
        "deposit_type", "agent", "company", "customer_type", "dia_semana"]
 # Conteos con cola larga a la derecha (bitácora EDA #11): log1p solo para el modelo lineal.
@@ -38,10 +40,16 @@ SESGADAS = ["lead_time", "stays_in_weekend_nights", "stays_in_week_nights",
 
 
 def columnas_modelo(con_sospechosas: bool = False):
-    """Listas (numéricas, categóricas) que entran al modelo según el escenario."""
-    num = NUM_BASE + NUM_NUEVAS + (SOSPECHOSAS_NUM if con_sospechosas else [])
+    """Listas (numéricas, categóricas) que usa el ColumnTransformer según el escenario."""
+    num = NUM_BASE + NUM_NUEVAS + NUM_APRENDIDAS + (SOSPECHOSAS_NUM if con_sospechosas else [])
     cat = CAT + (SOSPECHOSAS_CAT if con_sospechosas else [])
     return num, cat
+
+
+def columnas_entrada(con_sospechosas: bool = False):
+    """Columnas que debe traer el DataFrame que recibe el Pipeline (sin las que crea él mismo)."""
+    num, cat = columnas_modelo(con_sospechosas)
+    return [c for c in num if c not in NUM_APRENDIDAS] + cat
 
 
 def cargar_crudos(ruta: Path) -> pd.DataFrame:

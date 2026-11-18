@@ -5,7 +5,8 @@ Panamericana), desarrollado con la metodología CRISP-DM sobre el conjunto *Hote
 (Antonio, de Almeida y Nunes, 2019): 119,390 reservas de un hotel urbano (Lisboa) y un resort
 (Algarve) con llegadas entre julio de 2015 y agosto de 2017.
 
-**Objetivo:** estimar, al momento de la reserva, la probabilidad de que se cancele, para reducir
+**Objetivo:** estimar, con la información disponible el día anterior a la llegada, la probabilidad
+de que una reserva se cancele, para reducir
 el ingreso en riesgo y las habitaciones-noche perdidas.
 
 ## Entregas
@@ -19,9 +20,9 @@ el ingreso en riesgo y las habitaciones-noche perdidas.
 ## Resultados principales (Entrega 2)
 
 **Preparación.** 180 filas imposibles eliminadas; 3 variables con fuga excluidas; nulos con
-significado convertidos en categorías; 13 variables nuevas (día de la semana y estacionalidad
+significado convertidos en categorías; 14 variables nuevas (día de la semana y estacionalidad
 cíclica a partir de la fecha de llegada, tasa de cancelación previa, banderas de canal, ADR por
-persona); partición temporal (prueba = llegadas de mayo a agosto de 2017); transformaciones
+persona, frecuencia histórica de la agencia); partición temporal (prueba = llegadas de mayo a agosto de 2017); transformaciones
 ajustadas solo con entrenamiento dentro de un `Pipeline`.
 
 **Modelado** (clasificación binaria, PR-AUC como métrica principal, validación cruzada agrupada
@@ -31,18 +32,21 @@ por duplicados):
 |---|---|---|---|
 | Línea base (prevalencia) | 0.363 | 0.406 | 0.500 |
 | Regresión logística **implementada con NumPy** | 0.842 | 0.785 | 0.811 |
-| Random Forest (ajustado) | 0.872 | 0.786 | 0.820 |
-| **Gradient Boosting (ajustado, modelo final)** | **0.873** | **0.791** | **0.824** |
-| Gradient Boosting + variables sospechosas de fuga | 0.927 | 0.837 | 0.877 |
+| Random Forest (ajustado) | 0.873 | 0.787 | 0.821 |
+| **Gradient Boosting (ajustado, modelo final)** | **0.873** | **0.784** | **0.816** |
+| Gradient Boosting + variables sospechosas de fuga | 0.926 | 0.834 | 0.876 |
 
 - La regresión logística desde cero (sigmoide, entropía cruzada con L2, gradiente verificado
   numéricamente, descenso por gradiente con mini-lotes) iguala el desempeño de scikit-learn.
-- Las variables sospechosas inflan la métrica 5 puntos: no estarían disponibles al reservar y se
-  excluyen.
+- Las variables sospechosas inflan la métrica 5 puntos: no estarían disponibles el día anterior a
+  la llegada y se excluyen.
 - La caída en prueba se explica por deriva temporal (la tasa de cancelación del resort sube de
   26 % a 36 %); se recomienda reentrenar y recalibrar el umbral periódicamente.
-- Con el umbral elegido (0.55), el modelo anticipa 2.7 de los 5.0 millones de ingreso en riesgo
-  del periodo de prueba con 77 % de precisión.
+- El umbral (0.72) minimiza el costo esperado suponiendo que reubicar a un huésped cuesta 1.5 veces
+  su tarifa. En la prueba, el modelo anticipa 2.2 de los 5.0 millones de ingreso en riesgo con 81 %
+  de precisión y reduce 28 % el costo de las cancelaciones.
+- Interpretación con importancia por permutación y valores SHAP: depósito, solicitudes especiales,
+  anticipación, agencia, tipo de cliente y segmento.
 
 
 ## Estructura
