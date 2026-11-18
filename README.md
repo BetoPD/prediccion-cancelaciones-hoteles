@@ -89,7 +89,14 @@ El servidor `mcp_server/server.py` expone tres herramientas:
 Campos obligatorios: `hotel`, `lead_time`, `fecha_llegada`, `stays_in_weekend_nights`,
 `stays_in_week_nights` y `adr`; los demás tienen valores por defecto típicos.
 
-SERVIDOR_RENDER
+**Servidor público (Render):** `https://prediccion-cancelaciones-hoteles.onrender.com/mcp`
+
+- En claude.ai: *Settings → Connectors → Add custom connector* y pegar la URL anterior.
+- En Claude Code: `claude mcp add --transport http hoteles https://prediccion-cancelaciones-hoteles.onrender.com/mcp`
+- Estado: `https://prediccion-cancelaciones-hoteles.onrender.com/salud`
+
+El plan gratuito de Render apaga el servicio tras 15 minutos sin uso; la primera llamada después
+puede tardar ~1 minuto en responder. El servidor no tiene autenticación (solo expone predicciones).
 
 **Local:**
 
