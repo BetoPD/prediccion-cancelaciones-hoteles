@@ -1,0 +1,85 @@
+{
+  "proyecto": "Predicción de cancelaciones de reservas hoteleras",
+  "version_paquete": "1.0.0",
+  "modelo": "Gradient Boosting (HGB)",
+  "escenario": "conservador (sin country, required_car_parking_spaces ni booking_changes)",
+  "fecha_entrenamiento": "2026-11-18",
+  "datos": "Hotel Booking Demand (Antonio et al., 2019); entrenamiento: llegadas jul-2015 a abr-2017",
+  "hiperparametros": {
+    "l2_regularization": 0.004207988669606638,
+    "learning_rate": 0.03051362379613698,
+    "max_features": 0.3406585285177396,
+    "max_leaf_nodes": 102,
+    "min_samples_leaf": 126
+  },
+  "umbral": 0.55064679614736,
+  "metricas_cv": {
+    "pr_auc": 0.8725707105321178,
+    "roc_auc": 0.8964016722933039,
+    "f1": 0.7643134701246328,
+    "recall": 0.7457100222222294,
+    "precision": 0.7838887906424868
+  },
+  "metricas_prueba": {
+    "pr_auc": 0.7909933737248027,
+    "roc_auc": 0.8237563005840165,
+    "f1": 0.6445918958964117,
+    "recall": 0.5560124472104913,
+    "precision": 0.7667432950191571,
+    "exactitud": 0.7512287505072823
+  },
+  "variables_entrada": {
+    "numericas": [
+      "lead_time",
+      "arrival_date_week_number",
+      "arrival_date_day_of_month",
+      "stays_in_weekend_nights",
+      "stays_in_week_nights",
+      "adults",
+      "children",
+      "babies",
+      "is_repeated_guest",
+      "previous_cancellations",
+      "previous_bookings_not_canceled",
+      "days_in_waiting_list",
+      "adr",
+      "total_of_special_requests",
+      "noches",
+      "huespedes",
+      "estancia_cero",
+      "proporcion_fin_semana",
+      "tiene_ninos",
+      "mes_sin",
+      "mes_cos",
+      "llegada_fin_semana",
+      "tiene_agente",
+      "tiene_empresa",
+      "historial_reservas",
+      "tasa_cancelacion_previa",
+      "adr_por_persona"
+    ],
+    "categoricas": [
+      "hotel",
+      "meal",
+      "market_segment",
+      "distribution_channel",
+      "reserved_room_type",
+      "deposit_type",
+      "agent",
+      "company",
+      "customer_type",
+      "dia_semana"
+    ]
+  },
+  "versiones": {
+    "python": "3.12.7",
+    "scikit-learn": "1.5.1",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2"
+  },
+  "limitaciones": [
+    "Entrenado con dos hoteles de Portugal (2015-2017); fuera de ese contexto requiere reentrenar.",
+    "La tasa de cancelación tiene deriva temporal: conviene reentrenar periódicamente.",
+    "deposit_type = Non Refund se asocia a cancelación por bloques de agencias/grupos, no es causal."
+  ]
+}

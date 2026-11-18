@@ -1,0 +1,14 @@
+# Blueprint de Render: servidor MCP del modelo de cancelaciones.
+services:
+  - type: web
+    name: prediccion-cancelaciones-hoteles
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt && pip install .
+    startCommand: python mcp_server/server.py
+    healthCheckPath: /salud
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7

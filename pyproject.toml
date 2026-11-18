@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hoteles"
+version = "1.0.0"
+description = "Predicción de cancelaciones de reservas hoteleras (CRISP-DM, Aprendizaje Máquina I)"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26,<2", "pandas>=2.2,<2.3", "scikit-learn==1.5.1", "joblib>=1.4"]
+
+[project.optional-dependencies]
+notebooks = ["matplotlib>=3.8", "scipy>=1.11", "pyarrow>=14", "jupyter"]
+mcp = ["mcp>=1.9,<2"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

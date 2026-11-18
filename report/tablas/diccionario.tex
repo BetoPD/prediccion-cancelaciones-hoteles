@@ -1,0 +1,32 @@
+\texttt{hotel} & Categórica & \{Resort Hotel, City Hotel\} & Hotel de la reserva (H1 resort, H2 urbano) & Predictora & 0 \\
+\texttt{is\_canceled} & Binaria & \{0, 1\} & 1 si la reserva fue cancelada & \textbf{Objetivo} & 0 \\
+\texttt{lead\_time} & Entera & días, [0, 737] & Días entre el registro de la reserva y la llegada & Predictora & 0 \\
+\texttt{arrival\_date\_year} & Entera & \{2015, 2016, 2017\} & Año de llegada & Excluida (no recurrente) & 0 \\
+\texttt{arrival\_date\_month} & Categórica & enero–diciembre & Mes de llegada & Predictora & 0 \\
+\texttt{arrival\_date\_week\_number} & Entera & semana, [1, 53] & Semana del año de llegada & Predictora & 0 \\
+\texttt{arrival\_date\_day\_of\_month} & Entera & día, [1, 31] & Día del mes de llegada & Predictora & 0 \\
+\texttt{stays\_in\_weekend\_nights} & Entera & noches, [0, 19] & Noches de sábado o domingo reservadas & Predictora & 0 \\
+\texttt{stays\_in\_week\_nights} & Entera & noches, [0, 50] & Noches de lunes a viernes reservadas & Predictora & 0 \\
+\texttt{adults} & Entera & personas, [0, 55] & Número de adultos & Predictora & 0 \\
+\texttt{children} & Entera & personas, [0, 10] & Número de niños & Predictora & 0.00 \\
+\texttt{babies} & Entera & personas, [0, 10] & Número de bebés & Predictora & 0 \\
+\texttt{meal} & Categórica & \{BB, HB, FB, SC, Undefined\} & Plan de alimentos; SC y Undefined = sin plan & Predictora & 0 \\
+\texttt{country} & Categórica & ISO 3166-1 alfa-3 (177) & País de origen del huésped & Sospechosa de fuga & 0.41 \\
+\texttt{market\_segment} & Categórica & 8 niveles & Segmento de mercado (TA = agencias, TO = operadores) & Predictora & 0 \\
+\texttt{distribution\_channel} & Categórica & 5 niveles & Canal de distribución de la reserva & Predictora & 0 \\
+\texttt{is\_repeated\_guest} & Binaria & \{0, 1\} & 1 si el huésped tiene reservas previas & Predictora & 0 \\
+\texttt{previous\_cancellations} & Entera & reservas, [0, 26] & Cancelaciones previas del mismo cliente & Predictora & 0 \\
+\texttt{previous\_bookings\_not\_canceled} & Entera & reservas, [0, 72] & Reservas previas no canceladas del cliente & Predictora & 0 \\
+\texttt{reserved\_room\_type} & Categórica & 10 códigos & Tipo de habitación reservada (código anonimizado) & Predictora & 0 \\
+\texttt{assigned\_room\_type} & Categórica & 12 códigos & Tipo de habitación asignada & Excluida (fuga) & 0 \\
+\texttt{booking\_changes} & Entera & cambios, [0, 21] & Modificaciones hasta el \emph{check-in} o la cancelación & Sospechosa de fuga & 0 \\
+\texttt{deposit\_type} & Categórica & \{No Deposit, Non Refund, Refundable\} & Tipo de depósito garantizado & Predictora & 0 \\
+\texttt{agent} & Categórica & ID (333) & Agencia que hizo la reserva; nulo = sin agencia & Predictora & 13.7 \\
+\texttt{company} & Categórica & ID (352) & Empresa responsable; nulo = no aplica & Predictora & 94.3 \\
+\texttt{days\_in\_waiting\_list} & Entera & días, [0, 391] & Días en lista de espera antes de confirmar & Predictora & 0 \\
+\texttt{customer\_type} & Categórica & 4 niveles & Contract, Group, Transient, Transient-Party & Predictora & 0 \\
+\texttt{adr} & Continua & moneda/noche, [-6.38, 5400] & Tarifa diaria promedio (\emph{Average Daily Rate}) & Predictora & 0 \\
+\texttt{required\_car\_parking\_spaces} & Entera & espacios, [0, 8] & Espacios de estacionamiento solicitados & Sospechosa de fuga & 0 \\
+\texttt{total\_of\_special\_requests} & Entera & solicitudes, [0, 5] & Solicitudes especiales (cama, piso, etc.) & Predictora & 0 \\
+\texttt{reservation\_status} & Categórica & \{Canceled, Check-Out, No-Show\} & Último estado de la reserva & Excluida (fuga) & 0 \\
+\texttt{reservation\_status\_date} & Fecha & 2014-10-17 a 2017-09-14 & Fecha del último estado & Excluida (fuga) & 0 \\
