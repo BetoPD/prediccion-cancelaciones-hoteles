@@ -16,6 +16,7 @@ el ingreso en riesgo y las habitaciones-noche perdidas.
 | 1 | Entendimiento del negocio y de los datos | [`notebooks/01_EDA.ipynb`](notebooks/01_EDA.ipynb) |
 | 2 | Preparación de los datos | [`notebooks/02_preparacion.ipynb`](notebooks/02_preparacion.ipynb) |
 | 2 | Modelado | [`notebooks/03_modelado.ipynb`](notebooks/03_modelado.ipynb) |
+| 2 | Reporte (IEEE) | [`report/entrega2.pdf`](report/entrega2.pdf) · fuente [`report/entrega2.tex`](report/entrega2.tex) |
 
 ## Resultados principales (Entrega 2)
 
